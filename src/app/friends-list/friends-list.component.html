@@ -12,8 +12,10 @@
     </tr>
   </table>
   <button
+    [ngStyle]="{ visibility: amIAdmin ? 'visible' : 'hidden' }"
     class="w-50 btn btn-light mt-5"
-    style="height: 60px; margin-bottom: 50px"
+    style="height: 60px; margin-bottom: 50px; font-size: x-large"
+    (click)="match()"
   >
     Start
   </button>

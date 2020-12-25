@@ -6,7 +6,7 @@ import { FriendsListComponent } from "./friends-list/friends-list.component";
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: ":id", component: HomeComponent },
-  { path: "list/:nickname/:id", component: FriendsListComponent },
+  { path: "list/:id", component: FriendsListComponent },
 ];
 
 @NgModule({

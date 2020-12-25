@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
+import { environment } from "src/environments/environment";
+
+import "firebase/database";
+import { AngularFireDatabase } from "@angular/fire/database";
 
 @Component({
   selector: "Home",
@@ -9,17 +13,37 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   nickname = "";
-  id = "";
+  roomID = "";
+  linkForShare = "";
   isInvite = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id || this.getUniqueId(1);
+    this.roomID = this.route.snapshot.params.id || this.getUniqueId(1);
+    this.linkForShare = environment.basePath + "/" + this.roomID;
   }
 
-  goToList() {
-    this.router.navigate(["list", this.nickname, this.id]);
+  postMyDataToFirebase() {
+    this.db
+      .list("friends")
+      .push({
+        nickname: this.nickname,
+        roomID: this.roomID,
+        isAdmin: !this.isInvite,
+      })
+      .then((res) => {
+        this.db
+          .object(`friends/${res["path"].pieces_[1]}`)
+          .update({ ID: res["path"].pieces_[1] })
+          .then(() => {
+            this.router.navigate(["list", res["path"].pieces_[1]]);
+          });
+      });
   }
 
   getUniqueId(parts: number): string {

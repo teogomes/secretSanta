@@ -1,5 +1,8 @@
 export interface Friend {
-  id: string;
+  ID: string;
   nickname: string;
   roomID: string;
+  isAdmin: boolean;
+  matchedWith: string;
+  matched: boolean;
 }

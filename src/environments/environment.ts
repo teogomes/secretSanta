@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  basePath: "localhost:4200",
   firebase: {
     apiKey: "AIzaSyC4r6UlCfSwLgA1hDPANsaTzLUKoWnTLFA",
     authDomain: "secretsanta-1e2b8.firebaseapp.com",

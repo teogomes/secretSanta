@@ -7,6 +7,7 @@ import { FriendsListComponent } from "./friends-list/friends-list.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 //Firebase Modules
 import { AngularFireModule } from "@angular/fire";
@@ -14,6 +15,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { environment } from "../environments/environment";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, FriendsListComponent],
@@ -26,6 +28,8 @@ import { environment } from "../environments/environment";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
