@@ -1,0 +1,11 @@
+.link {
+  color: white;
+  position: fixed;
+  text-align: center;
+  width: 50%;
+  height: 30px;
+  margin-left: -25%;
+  background: red;
+  bottom: 0px;
+  left: 50%;
+}

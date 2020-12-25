@@ -1,0 +1,23 @@
+<body
+  class="d-flex flex-column justify-content-between align-items-center pb-5"
+  style="background-color: rgb(23, 135, 209)"
+>
+  <table class="w-100">
+    <tr
+      class="w-100 bg-light border border-dark"
+      style="height: 80px"
+      *ngFor="let friend of invitedFriends"
+    >
+      <h1 class="p-3">{{ friend.nickname }}</h1>
+    </tr>
+  </table>
+  <button
+    class="w-50 btn btn-light mt-5"
+    style="height: 60px; margin-bottom: 50px"
+  >
+    Start
+  </button>
+  <button class="link" (click)="copyMessage(link)">
+    Click to copy link: {{ link }}
+  </button>
+</body>
