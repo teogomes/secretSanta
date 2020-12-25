@@ -4,8 +4,15 @@
 >
   <table class="w-100">
     <tr
-      class="w-100 bg-light border border-dark"
+      class="w-100 border border-dark"
       style="height: 80px"
+      [ngStyle]="
+        friend.ID == myID
+          ? { 'background-color': 'red' }
+          : matchedWith && friend.ID == matchedWith.ID
+          ? { 'background-color': 'yellow' }
+          : { 'background-color': 'white' }
+      "
       *ngFor="let friend of invitedFriends"
     >
       <h1 class="p-3">{{ friend.nickname }}</h1>
@@ -23,3 +30,40 @@
     Click to copy link: {{ link }}
   </button>
 </body>
+
+<!-- Modal -->
+<div
+  *ngIf="showModal"
+  class="modal show"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Buy a gift</h5>
+        <button
+          type="button"
+          class="close"
+          (click)="toggleModal(false)"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">{{ matchedWith.nickname }}</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="toggleModal(false)"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

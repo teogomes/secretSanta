@@ -16,8 +16,11 @@ export class FriendsListComponent implements OnInit {
 
   pathName = "friends";
   roomID = "";
+  myID = "";
   link = environment.basePath + "/";
   amIAdmin = false;
+  matchedWith: Friend = null;
+  showModal = false;
   invitedFriends: Friend[] = [];
 
   constructor(
@@ -27,21 +30,27 @@ export class FriendsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get("id");
+    this.myID = this.route.snapshot.paramMap.get("id");
 
     this.db
       .list(this.pathName)
       .valueChanges()
       .subscribe((res: Friend[]) => {
+        let matchedWithID = "";
         let me = res.find((friend) => {
-          return friend.ID == id;
+          matchedWithID = friend.matchedWith;
+          return friend.ID == this.myID;
         });
         this.roomID = me.roomID;
         this.amIAdmin = me.isAdmin;
         this.link += this.roomID;
-        this.invitedFriends = res.filter(
-          (friend) => friend.roomID == this.roomID
-        );
+        this.invitedFriends = res.filter((friend) => {
+          if (friend.ID == matchedWithID) {
+            this.matchedWith = friend;
+            this.showModal = true;
+          }
+          return friend.roomID == this.roomID;
+        });
       });
   }
 
@@ -102,6 +111,10 @@ export class FriendsListComponent implements OnInit {
             this.match();
           });
       });
+  }
+
+  toggleModal(show: boolean) {
+    this.showModal = show;
   }
 
   shuffle(array) {
