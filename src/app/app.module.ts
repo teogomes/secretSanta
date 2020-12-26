@@ -8,14 +8,19 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { environment } from "../environments/environment";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 //Firebase Modules
 import { AngularFireModule } from "@angular/fire";
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from "@angular/fire/storage";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { environment } from "../environments/environment";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, FriendsListComponent],
@@ -28,6 +33,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
   ],

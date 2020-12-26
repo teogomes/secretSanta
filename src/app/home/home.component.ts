@@ -5,6 +5,10 @@ import { environment } from "src/environments/environment";
 
 import "firebase/database";
 import { AngularFireDatabase } from "@angular/fire/database";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { resolve } from "@angular/compiler-cli/src/ngtsc/file_system";
 
 @Component({
   selector: "Home",
@@ -17,10 +21,14 @@ export class HomeComponent implements OnInit {
   linkForShare = "";
   isInvite = true;
 
+  selectedFile: File = null;
+  downloadURL: Observable<string>;
+
   constructor(
     private db: AngularFireDatabase,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit() {
@@ -41,9 +49,46 @@ export class HomeComponent implements OnInit {
           .object(`friends/${res["path"].pieces_[1]}`)
           .update({ ID: res["path"].pieces_[1] })
           .then(() => {
+            this.uploadFile(res["path"].pieces_[1]);
             this.router.navigate(["list", res["path"].pieces_[1]]);
           });
       });
+  }
+
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadFile(id) {
+    return new Promise((resolve) => {
+      var n = Date.now();
+      const file = this.selectedFile;
+
+      if (file == null) {
+        return resolve("");
+      }
+
+      const filePath = `RoomsImages/${n}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(`RoomsImages/${n}`, file);
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            this.downloadURL.subscribe((url) => {
+              debugger;
+              if (url) {
+                this.db.object(`friends/${id}`).update({ imageURL: url });
+              }
+            });
+          })
+        )
+        .subscribe((url) => {
+          if (url) {
+          }
+        });
+    });
   }
 
   getUniqueId(parts: number): string {

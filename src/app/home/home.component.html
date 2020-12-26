@@ -1,93 +1,104 @@
-<div
-  class="h-100 row align-items-center"
-  style="background-color: rgb(23, 135, 209)"
->
-  <div
-    class="container w-75 align-items-center align-items-center"
-    style="height: 35%"
-  >
-    <div
-      class="col h-100 w-100 d-flex flex-column justify-content-between py-5 align-items-center"
-    >
-      <div class="row h-25 w-75">
-        <form class="bg-light w-100 p-3 rounded border border-dark">
-          <div class="form-group">
-            <label class="text-dark" for="nickNameInput"
-              >Add your nickname</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="nickNameInput"
-              [(ngModel)]="nickname"
-              name="nickname"
-              placeholder="Enter a nickname"
-            />
+<div class="backgroundContainer h-100 row align-items-center">
+  <div class="container w-50 bg-light border border-dark rounded">
+    <div class="row">
+      <div class="col-md-5 mx-auto">
+        <div id="first">
+          <div class="myform form">
+            <div class="logo mb-3">
+              <div class="col-md-12 py-3 text-center">
+                <h1>{{ isInvite ? "Enter Room" : "Create Room" }}</h1>
+              </div>
+            </div>
+            <form action="" method="post" name="login">
+              <div class="form-group">
+                <label>Nickname</label>
+                <input
+                  type="name"
+                  name="name"
+                  class="form-control"
+                  id="name"
+                  [(ngModel)]="nickname"
+                  placeholder="Enter a nickname"
+                />
+              </div>
+              <input
+                class="py-3"
+                type="file"
+                id="myFile"
+                name="filename"
+                (change)="onFileSelected($event)"
+                accept=".png,.jpg"
+              />
+              <div class="col-md-12 text-center">
+                <button
+                  *ngIf="isInvite"
+                  [disabled]="nickname === ''"
+                  type="submit"
+                  class="btn btn-block mybtn btn-primary my-5"
+                  (click)="postMyDataToFirebase()"
+                >
+                  Enter
+                </button>
+                <button
+                  *ngIf="!isInvite"
+                  [disabled]="nickname === ''"
+                  type="submit"
+                  class="btn btn-block mybtn btn-primary my-5"
+                  data-toggle="modal"
+                  data-target="#successModal"
+                >
+                  Create
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
-      <div class="row h-25 w-75">
-        <button
-          [ngStyle]="{ visibility: isInvite ? 'visible' : 'hidden' }"
-          [disabled]="nickname === ''"
-          type="button"
-          class="w-100 btn btn-light rounded border border-dark"
-          (click)="postMyDataToFirebase()"
-        >
-          Enter Room
-        </button>
-        <button
-          [ngStyle]="{ visibility: !isInvite ? 'visible' : 'hidden' }"
-          type="button"
-          [disabled]="nickname === ''"
-          class="w-100 btn btn-light rounded border border-dark"
-          data-toggle="modal"
-          data-target="#successModal"
-        >
-          Create New Room
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="successModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="successModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Share link with your friends
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">{{ linkForShare }}</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-dismiss="modal"
-          (click)="postMyDataToFirebase()"
-        >
-          Copy
-        </button>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="successModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="successModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Share link with your friends
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">{{ linkForShare }}</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="postMyDataToFirebase()"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

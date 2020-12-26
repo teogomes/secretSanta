@@ -45,7 +45,7 @@ export class FriendsListComponent implements OnInit {
         this.amIAdmin = me.isAdmin;
         this.link += this.roomID;
         this.invitedFriends = res.filter((friend) => {
-          if (friend.ID == matchedWithID) {
+          if (matchedWithID && friend.ID == matchedWithID) {
             this.matchedWith = friend;
             this.showModal = true;
           }

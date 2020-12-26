@@ -4,8 +4,7 @@
 >
   <table class="w-100">
     <tr
-      class="w-100 border border-dark"
-      style="height: 80px"
+      class="w-100 border border-dark align-items-center justify-content-start d-flex"
       [ngStyle]="
         friend.ID == myID
           ? { 'background-color': 'red' }
@@ -15,6 +14,12 @@
       "
       *ngFor="let friend of invitedFriends"
     >
+      <img
+        *ngIf="friend.imageURL != null"
+        class="p-3 rounded-circle"
+        style="height: 70px; width: 70px"
+        [src]="friend.imageURL"
+      />
       <h1 class="p-3">{{ friend.nickname }}</h1>
     </tr>
   </table>
