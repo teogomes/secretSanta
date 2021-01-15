@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   roomID = "";
   linkForShare = "";
   isInvite = true;
+  showLoader = false;
 
   selectedFile: File = null;
   downloadURL: Observable<string>;
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   postMyDataToFirebase() {
+    this.showLoader = true;
     this.db
       .list("friends")
       .push({

@@ -3,3 +3,28 @@
   padding-bottom: 4.2rem;
   background: rgba(0, 0, 0, 0.76);
 }
+
+.link {
+  color: white;
+  position: fixed;
+  text-align: center;
+  width: 50%;
+  height: 30px;
+  margin-left: -25%;
+  bottom: 0px;
+  left: 50%;
+}
+
+/* Absolute Center Spinner */
+.loadingPage {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

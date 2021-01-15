@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/secret-santa-app",
+    "rewrites": [
+      {
+        "source": "/apps/**",
+        "destination": "/apps.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}

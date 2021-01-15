@@ -21,6 +21,7 @@ import {
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, FriendsListComponent],
@@ -36,6 +37,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],

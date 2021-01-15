@@ -1,5 +1,5 @@
 <div class="backgroundContainer h-100 row align-items-center">
-  <div class="container w-50 bg-light border border-dark rounded">
+  <div class="container w-75 bg-light border border-dark rounded">
     <div class="row">
       <div class="col-md-5 mx-auto">
         <div id="first">
@@ -21,6 +21,7 @@
                   placeholder="Enter a nickname"
                 />
               </div>
+              <label>Choose an image</label>
               <input
                 class="py-3"
                 type="file"
@@ -103,3 +104,12 @@
     </div>
   </div>
 </div>
+<div
+  *ngIf="showLoader"
+  class="loadingPage spinner-border text-primary"
+  id="spinner"
+  role="status"
+>
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="version">Version: 0.1</div>
